@@ -52,7 +52,6 @@ You can explore the model training, data processing, and evaluation steps below:
 ---
 
 ## ⚙️ How to Run Locally
-```bash
 # 1️⃣ Clone the repository
 git clone https://github.com/Cemrekucukg/weather-forecast.git
 cd weather-forecast
