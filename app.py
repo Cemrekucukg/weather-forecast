@@ -16,7 +16,7 @@ st.write("Enter weather parameters below to predict the temperature.")
 # ------------------------------
 # 🔹 1. Download model from Google Drive
 # ------------------------------
-DRIVE_ID = "12JoXiG2YFTtXJ-t7Fo_mDRxhGqOHNGoc"  # ✅ Cemre'nin Drive ID'si
+DRIVE_ID = "12JoXiG2YFTtXJ-t7Fo_mDRxhGqOHNGoc" 
 MODEL_URL = f"https://drive.google.com/uc?export=download&id={DRIVE_ID}"
 MODEL_PATH = "weather_model.joblib"
 
