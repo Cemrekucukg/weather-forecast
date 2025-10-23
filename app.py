@@ -7,7 +7,7 @@ import os
 
 # 🎯 Google Drive'dan model dosyasını otomatik indir
 MODEL_URL = "https://drive.google.com/uc?export=download&id=13i2gE2UGZD-4oomAa8iZOZqqGG8iJW8d"
-MODEL_PATH = "weather_model.pkl"
+MODEL_PATH = "weather_model.joblib"
 
 if not os.path.exists(MODEL_PATH):
     st.info("📦 Downloading model from Google Drive...")
