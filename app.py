@@ -2,30 +2,49 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import urllib.request
 import os
+import requests
 
-# 🎯 Google Drive'dan model dosyasını otomatik indir
-MODEL_URL = "https://drive.google.com/uc?export=download&id=13i2gE2UGZD-4oomAa8iZOZqqGG8iJW8d"
-MODEL_PATH = "weather_model.joblib"
+st.set_page_config(page_title="🌤️ Weather App", page_icon="☀️")
+
+st.title("🌤️ Weather Temperature Prediction App")
+st.write("Enter weather conditions below to get a temperature prediction.")
+
+# ------------------------------
+# 🔹 1. Model download from Google Drive
+# ------------------------------
+DRIVE_ID = "13i2gE2UGZD-4oomAa8iZOZqqGG8iJW8d" 
+MODEL_URL = f"https://drive.google.com/uc?export=download&id={DRIVE_ID}"
+MODEL_PATH = "weather_model.pkl"
 
 if not os.path.exists(MODEL_PATH):
     st.info("📦 Downloading model from Google Drive...")
-    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+    r = requests.get(MODEL_URL)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(r.content)
+    st.success("✅ Model downloaded successfully!")
 
-model = joblib.load(MODEL_PATH)
-st.title("🌤️ Weather Temperature Prediction App")
+# ------------------------------
+# 🔹 2. Load model safely
+# ------------------------------
+try:
+    model = joblib.load(MODEL_PATH)
+    st.success("✅ Model loaded and ready!")
+except Exception as e:
+    st.error(f"Model could not be loaded. Error: {e}")
 
-st.write("Enter the weather parameters below to predict the temperature:")
+# ------------------------------
+# 🔹 3. Simple input form
+# ------------------------------
+st.subheader("Enter weather parameters:")
+humidity = st.slider("Humidity (%)", 0, 100, 50)
+wind_speed = st.slider("Wind Speed (km/h)", 0, 150, 10)
+pressure = st.slider("Pressure (hPa)", 900, 1100, 1013)
 
-
-humidity = st.number_input("Humidity (%)", min_value=0, max_value=100, value=50)
-wind_speed = st.number_input("Wind Speed (km/h)", min_value=0.0, max_value=100.0, value=10.0)
-pressure = st.number_input("Pressure (hPa)", min_value=900.0, max_value=1100.0, value=1013.0)
-visibility = st.number_input("Visibility (km)", min_value=0.0, max_value=50.0, value=10.0)
-
-# 📈 Tahmin butonu
 if st.button("Predict Temperature"):
-    input_data = np.array([[humidity, wind_speed, pressure, visibility]])
-    prediction = model.predict(input_data)
-    st.success(f"🌡️ Predicted Temperature: {prediction[0]:.2f} °C")
+    X_new = np.array([[humidity, wind_speed, pressure]])
+    try:
+        prediction = model.predict(X_new)[0]
+        st.metric("Predicted Temperature (°C)", f"{prediction:.2f}")
+    except Exception as e:
+        st.warning(f"Prediction error: {e}")
