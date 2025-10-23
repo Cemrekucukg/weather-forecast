@@ -6,7 +6,7 @@ import urllib.request
 import os
 
 # 🎯 Google Drive'dan model dosyasını otomatik indir
-MODEL_URL = "https://drive.google.com/uc?export=download&id=1XmwNHfFH0jj0cLSIj0Gtp5_BjfWalUEZ"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=13i2gE2UGZD-4oomAa8iZOZqqGG8iJW8d"
 MODEL_PATH = "weather_model.pkl"
 
 if not os.path.exists(MODEL_PATH):
