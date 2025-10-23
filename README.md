@@ -71,5 +71,8 @@ streamlit run app.py
 💼 [LinkedIn](https://linkedin.com/in/cemre-kucukgode-/)  
 💻 [GitHub](https://github.com/Cemrekucukg)
 
+---
+
+
 
 
