@@ -69,7 +69,7 @@ streamlit run app.py
 ## 👩‍💻 Author
 **Cemre Küçükgöde**  
 🌐 [Portfolio](https://cemrekucukgode.com)  
-💼 [LinkedIn](https://linkedin.com/in/cemre-kucukgode-/)  
+💼 [LinkedIn](https://linkedin.com/in/cemre-kucukgode/)  
 💻 [GitHub](https://github.com/Cemrekucukg)
 
 ---
